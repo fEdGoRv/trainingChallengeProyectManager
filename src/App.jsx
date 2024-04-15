@@ -8,11 +8,12 @@ function App() {
   const [displayProyect, setDisplayProyect] = useState({
     form: false,
     proyect: false,
-    data:{
-      name:'',
-      description:'',
-      date:''
-    }
+    data: {
+      name: '',
+      description: '',
+      date: ''
+    },
+    tasks:[]
   });
   const [proyectToDo, setProyectToDo] = useState([]);
   const addButtonStyles = "shadow-lg rounded hover:bg-gray-300 border-solid border-2 border-black font-bold p-2 m-8 "
@@ -20,26 +21,27 @@ function App() {
   function handleData(data) {
     setProyectToDo(prevProyectToDo => [...prevProyectToDo, data]);
     setDisplayProyect(prevState => ({
-     ...prevState, 
+      ...prevState,
       form: false
-  }));
+    }));
   }
 
   function handleForm() {
     setDisplayProyect(prevState => ({
       ...prevState,
-      form:true,
+      form: true,
       proyect: false
     }));
     ;
   }
 
-  function handleDisplayProyect(item) {
-    setDisplayProyect(prevState =>({
+  function handleDisplayProyect(item, task) {
+    setDisplayProyect(prevState => ({
       ...prevState,
       form: false,
       proyect: true,
-      data:{item}
+      data: { item },
+      tasks:[...prevState.tasks, task]
     }))
   }
 
@@ -47,6 +49,7 @@ function App() {
     <>
       <div className="flex m-8 rounded border-solid border-spacing-8 border-blue-300 ">
         <div className="flex flex-col items-center rounded-md  bg-orange-300">
+          <h1 className="font-bold text-4xl p-8">Your Proyects</h1>
           <button className={addButtonStyles} onClick={handleForm}>Add Proyect</button>
           {proyectToDo.map((item) =>
             <button className={addButtonStyles} onClick={() => handleDisplayProyect(item)} key={item.name}>{item.name}</button>
@@ -54,7 +57,7 @@ function App() {
         </div>
         <div className="items-center">
           {displayProyect.form && <FormProyect handleData={handleData} />}
-          {displayProyect.proyect && <ProyectDisplayer proy={displayProyect.data} />}
+          {displayProyect.proyect && <ProyectDisplayer onDisplay={handleDisplayProyect} tasks={displayProyect.tasks} proy={displayProyect.data} />}
         </div>
       </div>
     </>
