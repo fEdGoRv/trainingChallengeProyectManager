@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export default function ProyectDisplayer({ proy, tasks, onDisplay }) {
+export default function ProyectDisplayer({ proy, tasks, onDisplay, onDelete }) {
     console.log(tasks)
     function handleClick() {
         const task = taskRef.current.value;
@@ -27,15 +27,15 @@ export default function ProyectDisplayer({ proy, tasks, onDisplay }) {
                 <h2 className="font-bold text-3xl text-green-600 p-4 ">Tasks</h2>
                 <input ref={taskRef} className="m-4 bg-stone-400" />
                 <button onClick={handleClick} className="border-solid border-2 border-black p-1 m-2 rounded shadow-lg hover:bg-stone-400">+Add Task</button>
-                {tasks.length > 0 &&
+                {tasks.length >= 0 && tasks !== undefined && tasks !== null ?
                 <div className="flex flex-col">
                     {tasks.map((task, index) => (
                         <div key={index}>
-                            <p className="font-semibold text-green-400" >{task}</p>
-                            <button className={buttonStyle}>Delete task</button>
+                            <p className="font-semibold text-green-600" >{task}</p>
+                            <button onClick={()=>onDelete(index)} className={buttonStyle}>Delete task</button>
                         </div>
                     ))}
-                </div>}
+                </div> : ""}
             </div>
         </>
     )

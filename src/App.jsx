@@ -45,6 +45,14 @@ function App() {
     }))
   }
 
+  function handleDeleteTask(index){
+    setDisplayProyect(prevState => {
+      const updatedTasks = [...prevState.tasks]; // Create a copy of the tasks array
+      updatedTasks.splice(index, 1); // Remove the task at the specified index
+      return { ...prevState, tasks: updatedTasks }; // Update the state with the new tasks array
+    });
+  }
+
   return (
     <>
       <div className="flex m-8 rounded border-solid border-spacing-8 border-blue-300 ">
@@ -57,7 +65,7 @@ function App() {
         </div>
         <div className="items-center">
           {displayProyect.form && <FormProyect handleData={handleData} />}
-          {displayProyect.proyect && <ProyectDisplayer onDisplay={handleDisplayProyect} tasks={displayProyect.tasks} proy={displayProyect.data} />}
+          {displayProyect.proyect && <ProyectDisplayer onDisplay={handleDisplayProyect} onDelete={handleDeleteTask} tasks={displayProyect.tasks} proy={displayProyect.data} />}
         </div>
       </div>
     </>
