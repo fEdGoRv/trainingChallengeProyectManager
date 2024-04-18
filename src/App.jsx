@@ -60,9 +60,11 @@ function App() {
 
   function handleDeleteTask(indexp ,indexi){
     setDisplayProyect(prevState => {
-      const updatedTasks = [...prevState.data[indexp].tasks];
-      updatedTasks.splice(indexi, 1); 
-      return { ...prevState, tasks: updatedTasks };
+      const updatedData = [...prevState.data];
+      const updatedTasks= [...updatedData[indexp].tasks];
+      updatedTasks.splice(indexi, 1);
+      updatedData[indexp] = {...updatedData[indexp], tasks:updatedTasks} 
+      return { ...prevState, data:updatedData  };
     });
   }
 

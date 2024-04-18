@@ -34,7 +34,7 @@ export default function ProyectDisplayer({ proy, currentProject, onAddTask, onDe
                     {selectedProject.tasks.map((task, index) => (
                         <div key={index}>
                             <p className="font-semibold text-green-600" >{task}</p>
-                            <button onClick={()=>onDelete(index)} className={buttonStyle}>Delete task</button>
+                            <button onClick={()=>onDelete(currentProject, index)} className={buttonStyle}>Delete task</button>
                         </div>
                     ))}
                 </div> : ""}
