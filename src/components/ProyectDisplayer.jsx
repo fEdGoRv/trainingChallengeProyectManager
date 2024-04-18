@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export default function ProyectDisplayer({ proy, currentProject, onAddTask, onDelete }) {
+export default function ProyectDisplayer({ proy, currentProject, onAddTask, onDelete, onDeleteProyect }) {
     
     function handleClick() {
         const task = taskRef.current.value;
@@ -22,7 +22,7 @@ export default function ProyectDisplayer({ proy, currentProject, onAddTask, onDe
                     <p className="font-semibold text-green-400 ">Date: {selectedProject.date}</p>
                 </div>
                 <div>
-                    <button className={buttonStyle}>Delete Proyect</button>
+                    <button onClick={()=>onDeleteProyect(currentProject)} className={buttonStyle}>Delete Proyect</button>
                 </div>
             </div>
             <div className="bg-stone-300">

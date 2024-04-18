@@ -34,10 +34,10 @@ function App() {
         newData[i].tasks = [];
       }
       const updatedTasks = [...newData[i].tasks, task]
-      console.log("tasks:", updatedTasks)
-      newData ={...newData[i], tasks: updatedTasks}
-      console.log("object:",newData)
-      return {...prevState, data: newData}    
+      console.log("dataFirstCopy:",newData)
+      newData =[...newData, newData[i].tasks=updatedTasks]
+      console.log("data:",newData)
+      return {...prevState, data:newData}  
   });
 }
 
@@ -68,9 +68,10 @@ function App() {
 
   function handleDeleteProyect(index){
       setDisplayProyect(prevState=>{
-        const updatedProyects = [...prevState];
-        updatedProyects.data.splice(index,1);
-        return {...prevState, updatedProyects}
+        const newData= [...prevState.data]
+        displayProyect.proyect= false;
+        newData.splice(index,1);
+        return {...prevState, data:newData}
       })
   }
 
